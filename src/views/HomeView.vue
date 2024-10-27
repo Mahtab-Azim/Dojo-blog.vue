@@ -1,18 +1,33 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    Home
+    <p>my name is {{ name }} and my age is {{ age }}</p>
+    <button @click="handleClick">click me</button>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+
 
 export default {
   name: 'HomeView',
-  components: {
-    HelloWorld
+  //inside here we can write any kind of normal JS.
+  setup() {
+    console.log('setup')
+
+    let name = 'mario'
+    let age = 30
+
+    const handleClick = () => {
+      console.log('you clicked me')
+    }
+
+    //if we want to use them in our template we have to return whatever values we want to use inside template.
+    return { name, age, handleClick }
+  },
+  //this value right here is reactive
+  data() {
+    age: 40
   }
 }
 </script>
