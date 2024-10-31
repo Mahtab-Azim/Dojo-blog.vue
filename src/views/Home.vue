@@ -1,43 +1,44 @@
 <template>
   <div class="home">
-    Home
-    <p ref="p">my name is {{ name }} and my age is {{ age }}</p>
+    <h1>Home</h1>
+    <p>my name is {{ name }} and my age is {{ age }}</p>
     <button @click="handleClick">click me</button>
+    <!-- in template we dont use the value property -->
+    <button @click="age++">add 1 to age</button>
+    <input type="text" v-model="name">
+    
   </div>
 </template>
 
 <script>
-import { ref } from 'vue';
+import { ref } from 'vue'
 
 
 export default {
-  name: 'HomeView',
+  name: 'Home',
   //inside here we can write any kind of normal JS.
-  //it runs first before created,before mounted tec,
+  //it runs first before created,before mounted tec
   setup() {
-    console.log(this)
 
-    //we can't use this value before we return it (return is down)
-    const p =  ref(null)
+    // const p =  ref(null)
 
-    let name = 'mario'
-    let age = 30
+    //:by using ref now they are reactive value
+    const name = ref('mario')
+    const age = ref(30)
 
     const handleClick = () => {
-      //also output the value property
-      console.log(p, p.value)
-      //p.value to get that DOM element
-      p.value.classList.add('test')
-      //we can also change the text content of a ref
-      p.value.textContent = 'hello, mahtech'
+      name.value = 'luigi'
+      age.value = '35'
     }
 
     //if we want to use them in our template we have to return whatever values we want to use inside template.
-    return { name, age, handleClick, p }
+    return { name, age, handleClick }
   },
   //this value right here is reactive
-  // data() {
-  //   age: 40
-  // }
+  data() {
+    return {
+      score: 5
+    }
+  }
 }
 </script>
