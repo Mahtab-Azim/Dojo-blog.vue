@@ -1,44 +1,38 @@
 <template>
   <div class="home">
     <h1>Home</h1>
-    <p>my name is {{ name }} and my age is {{ age }}</p>
-    <button @click="handleClick">click me</button>
-    <!-- in template we dont use the value property -->
-    <button @click="age++">add 1 to age</button>
-    <input type="text" v-model="name">
-    
+    <h2>Refs</h2>
+    <p>{{ ninjaOne.name }} - {{ ninjaOne.age }}</p>
+    <button @click="updateNinjaOne">Update ninja one</button>
+    <h2>Reactive</h2>
+    <p>{{ ninjaTwo.name }} - {{ ninjaTwo.age }}</p>
+    <button @click="updateNinjaTwo">Update ninja two</button>
   </div>
 </template>
 
+
 <script>
-import { ref } from 'vue'
+import { ref, reactive } from 'vue'
 
 
 export default {
   name: 'Home',
-  //inside here we can write any kind of normal JS.
-  //it runs first before created,before mounted tec
   setup() {
+    //This ref has a value of an object, and this obj has two property.
+    const ninjaOne = ref({ name: 'mario', age: 30 })
+    //Use Reactive
+    const ninjaTwo = reactive({ name: 'luigi', age: 35 })
 
-    // const p =  ref(null)
-
-    //:by using ref now they are reactive value
-    const name = ref('mario')
-    const age = ref(30)
-
-    const handleClick = () => {
-      name.value = 'luigi'
-      age.value = '35'
+    const updateNinjaOne = () => {
+      ninjaOne.value.age = 40
     }
 
-    //if we want to use them in our template we have to return whatever values we want to use inside template.
-    return { name, age, handleClick }
-  },
-  //this value right here is reactive
-  data() {
-    return {
-      score: 5
+    //here i wrote, we dont need to use .value to acsses the value in reactive
+    const updateNinjaTwo = () => {
+      ninjaTwo.age = 45
     }
+
+    return { ninjaOne, updateNinjaOne, ninjaTwo, updateNinjaTwo }
   }
 }
 </script>
