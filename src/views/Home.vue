@@ -11,19 +11,24 @@
 
 <script>
 
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 
 
 export default {
   name: 'Home',
   setup() {
-    //begin it with empty string
+ 
     const search = ref('')
-    //create a ref and output some array of names (the array is the value of this ref (names))
     const names = ref(['mahtab', 'matin', 'moonteen', 'melina', 'maryam', 'elham', 'mario'])
 
+    //the first argument is what we want to watch,the 2nd argument is a func wich will fire every time that search ref value changes
+    //it is watch
+   watch(search, () => {
+    console.log('watch function raf')
+   })
+    
+
     const matchingNames = computed(() => {
-      //value cause we want the value of the ref, filter method directly on names cause names is a ref object
       return names.value.filter((name) => name.includes(search.value))
     })
 
